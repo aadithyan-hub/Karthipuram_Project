@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/figtree';
+
+@theme {
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Field paper, grove ink, paddy green, turmeric stake, survey line */
+  --color-paper: #f4f6f1;
+  --color-paper-2: #eaeee5;
+  --color-ink: #13261c;
+  --color-ink-2: #3c4f43;
+  --color-ink-3: #6a7a6f;
+  --color-line: #c9d2c4;
+  --color-line-soft: #dde3d8;
+
+  --color-paddy-50: #ecf5ef;
+  --color-paddy-100: #d3e8db;
+  --color-paddy-200: #a8d1b8;
+  --color-paddy-500: #2f8a5b;
+  --color-paddy-600: #1f6b45;
+  --color-paddy-700: #175436;
+  --color-paddy-800: #123f29;
+
+  --color-turmeric-50: #fdf6e4;
+  --color-turmeric-100: #f9e7b9;
+  --color-turmeric-300: #efc463;
+  --color-turmeric-400: #e3a72f;
+  --color-turmeric-600: #a8740f;
+  --color-turmeric-800: #6b4a0a;
+
+  --color-brick-50: #fbeeec;
+  --color-brick-100: #f5d5d0;
+  --color-brick-500: #b5483a;
+  --color-brick-600: #9a3a2e;
+
+  --color-sky-50: #eaf2f8;
+  --color-sky-100: #d1e3f0;
+  --color-sky-600: #2c6690;
+
+  --radius-field: 0.5rem;
+  --radius-panel: 0.875rem;
+
+  --animate-rise: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pop: pop 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-slide-in: slide-in 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-slide-in-left: slide-in-left 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-in-left {
+    from { transform: translateX(-100%); }
+    to { transform: none; }
+  }
+  @keyframes slide-in {
+    from { transform: translateX(100%); }
+    to { transform: none; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: 'ss01';
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 2px solid var(--color-turmeric-400);
+    outline-offset: 2px;
+  }
+  ::selection { background: var(--color-turmeric-100); }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+/* Survey-grid texture used behind the site plan */
+@utility survey-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-line) 55%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
