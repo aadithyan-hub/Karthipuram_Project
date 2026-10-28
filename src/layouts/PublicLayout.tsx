@@ -16,7 +16,7 @@ export function PublicLayout() {
   const { settings } = useDb()
   const [open, setOpen] = useState(false)
   const location = useLocation()
-  const onBooking = location.pathname.startsWith('/book')
+  const onBooking = location.pathname === '/book'
 
   useEffect(() => setOpen(false), [location.pathname, location.hash])
   useEffect(() => {
@@ -26,7 +26,7 @@ export function PublicLayout() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="sticky top-0 z-30 border-b border-line-soft bg-paper/90 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b print:hidden border-line-soft bg-paper/90 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           <Link to="/" aria-label="Karthipuram home">
             <Logo />
@@ -73,7 +73,7 @@ export function PublicLayout() {
         <Outlet />
       </main>
 
-      <footer className="bg-ink text-paper/75">
+      <footer className="bg-ink text-paper/75 print:hidden">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <Logo inverse />

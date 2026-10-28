@@ -3,7 +3,7 @@ import { newBookingRef, newId, newReferralCode, seededRng, type Rng } from './id
 import { buildPlots } from './plots'
 import type { Booking, BookingStatus, Broker, Db, LinkClick, Notification, SalesStage, Settings, Slot, StatusEvent } from './types'
 
-export const DB_VERSION = 3
+export const DB_VERSION = 4
 
 export const DEMO_ADMIN = { email: 'admin@karthipuram.demo', password: 'admin123', name: 'Site Admin' }
 export const DEMO_BROKER_PASSWORD = 'broker123'
@@ -141,7 +141,8 @@ export function createSeed(now = new Date()): Db {
       const viaBroker = rng() > 0.14
       const broker = viaBroker ? earningBrokers[weightedIndex(rng, brokerWeights)] : null
       const created = subHours(start, 6 + Math.floor(rng() * 24 * 9))
-      const createdAt = created > now ? subHours(now, 1 + Math.floor(rng() * 40)) : created
+      // Upcoming visits were booked at some point over the last ten days, never in the future.
+      const createdAt = created > now ? subHours(now, 1 + Math.floor(rng() * 24 * 10)) : created
       const name = `${pick(rng, FIRST)} ${pick(rng, LAST)}`
       const ph = phone(rng)
       usedPhones.push({ phone: ph, name, brokerId: broker?.id ?? null })

@@ -1,13 +1,19 @@
-import clsx from 'clsx'
+import clsx, { type ClassValue } from 'clsx'
 import { Check, ChevronLeft, ChevronRight, Copy, Loader2, X } from 'lucide-react'
 import { forwardRef, useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, type LinkProps } from 'react-router-dom'
 import { toast } from 'sonner'
+import { extendTailwindMerge } from 'tailwind-merge'
 import type { BookingStatus, BrokerStatus } from '@/data/types'
 import { BROKER_STATUS_LABEL, BROKER_STATUS_TONE, initials, STATUS_LABEL, STATUS_TONE, type Tone } from '@/lib/format'
 
-export const cn = clsx
+const twMerge = extendTailwindMerge({
+  extend: { theme: { radius: ['field', 'panel'] } },
+})
+
+/** Joins classes and lets later Tailwind utilities override earlier ones (e.g. `p-4` then `p-0`). */
+export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
 
 // ---------------------------------------------------------------- buttons
 
@@ -278,7 +284,7 @@ export function Avatar({ name, size = 'md', className }: { name: string; size?: 
 
 export function Panel({ title, description, actions, children, className, bodyClassName, id }: { title?: ReactNode; description?: ReactNode; actions?: ReactNode; children: ReactNode; className?: string; bodyClassName?: string; id?: string }) {
   return (
-    <section id={id} className={cn('rounded-panel border border-line-soft bg-white', className)}>
+    <section id={id} className={cn('min-w-0 rounded-panel border border-line-soft bg-white', className)}>
       {(title || actions) && (
         <header className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 border-b border-line-soft px-4 py-3.5 sm:px-5">
           <div className="min-w-0">

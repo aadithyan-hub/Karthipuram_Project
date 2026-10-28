@@ -24,8 +24,8 @@ export function SlotPicker({
   invalid?: boolean
   excludeSlotId?: string
 }) {
-  const now = new Date()
   const byDate = useMemo(() => {
+    const now = new Date()
     const map = new Map<string, SlotView[]>()
     for (const s of slots) {
       if (!s.active || s.startsAt <= now) continue

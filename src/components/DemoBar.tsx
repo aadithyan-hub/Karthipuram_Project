@@ -34,7 +34,7 @@ export function DemoBar() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         className={cn(
-          'fixed left-4 z-40 inline-flex h-10 items-center gap-2 rounded-full border border-ink/10 bg-ink px-4 text-[13px] font-semibold text-paper shadow-lg shadow-ink/20 transition-transform hover:-translate-y-0.5 print:hidden',
+          'fixed right-4 z-40 inline-flex h-10 items-center gap-2 rounded-full border border-ink/10 bg-ink px-4 text-[13px] font-semibold text-paper shadow-lg shadow-ink/20 transition-transform hover:-translate-y-0.5 print:hidden',
           inApp ? 'bottom-20 lg:bottom-4' : 'bottom-4',
         )}
       >
@@ -43,7 +43,7 @@ export function DemoBar() {
       </button>
 
       {open && (
-        <div className={cn('fixed left-4 z-40 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-panel border border-line bg-white shadow-2xl animate-pop print:hidden', inApp ? 'bottom-34 lg:bottom-18' : 'bottom-18')}>
+        <div className={cn('fixed right-4 z-40 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-panel border border-line bg-white shadow-2xl animate-pop print:hidden', inApp ? 'bottom-34 lg:bottom-18' : 'bottom-18')}>
           <div className="bg-ink px-4 py-3 text-paper">
             <p className="font-display text-[15px] font-semibold">Demo controls</p>
             <p className="mt-0.5 text-xs text-paper/60">Sample data lives in this browser. Open two tabs to watch bookings appear live.</p>
